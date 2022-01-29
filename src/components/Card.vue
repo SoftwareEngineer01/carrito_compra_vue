@@ -5,7 +5,7 @@
             <div class="card-body">                
                 <h5 class="card-title">{{producto.title}}</h5>
                 <p class="card-text">$ <span>{{producto.precio}}</span></p>
-                <button class="btn btn-dark">Comprar</button>
+                <button class="btn btn-dark" @click="agregar(producto)">Comprar</button>
             </div>
         </div>
       </div>
@@ -13,12 +13,31 @@
 
 <script>
 
+import {useStore} from 'vuex'
+import { click, computed, onMounted } from '@vue/runtime-core'
+
 export default {
     name: 'Card',
     props: {
         producto: Object,
     },
-   }
+
+    setup() {
+
+        const store = useStore()
+
+        const agregar = producto => {
+            store.dispatch('agregarAlCarrito', producto)
+            console.log(producto)
+        }
+
+        return {
+            agregar,
+        }
+
+    }
+
+}
 
 </script>
 

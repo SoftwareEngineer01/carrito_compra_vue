@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Carrito</h1>
+    {{carrito}}
     <hr>
     <div class="row">
       <Card
@@ -33,9 +34,11 @@ export default {
     })
 
     const productos  = computed(() => store.state.productos)
+    const carrito = computed(() => store.state.carrito)
 
     return {
       productos,
+      carrito,
     }
 
   }
