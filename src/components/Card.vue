@@ -28,7 +28,6 @@ export default {
 
         const agregar = producto => {
             store.dispatch('agregarAlCarrito', producto)
-            console.log(producto)
         }
 
         return {
