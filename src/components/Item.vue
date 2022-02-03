@@ -11,11 +11,12 @@
                 -
             </button>
         </td>
-        <td>$ <span>{{item.precio}}</span></td>
+        <td>$ <span>{{precioTotal}}</span></td>
       </tr>
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
  
 export default {
 
@@ -24,6 +25,17 @@ export default {
             type: Object,
             required: true,
         },
+    },
+    
+    setup(props) {
+
+        const precioTotal = computed(() => {
+            return props.item.precio * props.item.cantidad
+        })         
+        
+        return {
+            precioTotal,            
+        }           
     }
     
 }
