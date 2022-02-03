@@ -32,6 +32,17 @@ export default createStore({
       commit('setCarrito', producto)
     }
   },
+
+  getters : {
+    totalCantidad(state) {
+      let total = 0
+      for (let key in state.carrito) {
+        total += state.carrito[key].cantidad
+      }
+      return total
+    }
+  },
+
   modules: {
   }
 })
