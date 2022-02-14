@@ -13,6 +13,10 @@ export default createStore({
     // Agrega un producto al carrito
     setCarrito(state, carrito) {
       state.carrito[carrito.id] = carrito
+    },
+    // Vacia el carrito
+    vaciarCarrito(state) {
+      state.carrito = {}
     }
   },
   actions: {
@@ -34,13 +38,24 @@ export default createStore({
   },
 
   getters : {
+    // totalCantidad(state) {
+    //   let total = 0
+    //   for (let key in state.carrito) {
+    //     total += state.carrito[key].cantidad
+    //   }
+    //   return total
+    // },
     totalCantidad(state) {
-      let total = 0
-      for (let key in state.carrito) {
-        total += state.carrito[key].cantidad
-      }
-      return total
-    }
+      return Object.values(state.carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
+    },
+    totalPrecios(state) {
+      return Object.values(state.carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0).toLocaleString('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+      })
+    },
   },
 
   modules: {

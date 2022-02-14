@@ -29,9 +29,7 @@ export default {
     
     setup(props) {
 
-        const precioTotal = computed(() => {
-            return props.item.precio * props.item.cantidad
-        })         
+        const precioTotal = computed(() => props.item.precio * props.item.cantidad)         
         
         return {
             precioTotal,            
