@@ -4,10 +4,10 @@
         <td>{{item.title}}</td>
         <td>{{item.cantidad}}</td>
         <td>
-            <button class="btn btn-info btn-sm">
+            <button class="btn btn-info btn-sm" @click="aumentar(item.id)">
                 +
             </button>
-            <button class="btn btn-danger btn-sm">
+            <button class="btn btn-danger btn-sm" @click="disminuir(item.id)">
                 -
             </button>
         </td>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import {useStore} from 'vuex'
 import { computed } from '@vue/runtime-core'
  
 export default {
@@ -29,10 +30,16 @@ export default {
     
     setup(props) {
 
+        const store = useStore()
+
         const precioTotal = computed(() => props.item.precio * props.item.cantidad)         
+        const aumentar = id => {store.commit('aumentar', id)}
+        const disminuir = id => {store.commit('disminuir', id)}
         
         return {
-            precioTotal,            
+            precioTotal,
+            aumentar, 
+            disminuir,           
         }           
     }
     

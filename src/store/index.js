@@ -17,6 +17,16 @@ export default createStore({
     // Vacia el carrito
     vaciarCarrito(state) {
       state.carrito = {}
+    },
+    aumentar(state, id) {
+      state.carrito[id].cantidad += 1
+    },
+    disminuir(state, id) {
+      state.carrito[id].cantidad -= 1
+      // Si la cantidad es <=0, elimina el producto del carrito
+      if (state.carrito[id].cantidad <= 0) {
+        delete state.carrito[id]
+      }
     }
   },
   actions: {
